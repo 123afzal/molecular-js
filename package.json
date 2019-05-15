@@ -17,6 +17,7 @@
     "lodash": "^4.17.11",
     "moleculer": "^0.13.7",
     "nats": "^1.2.2",
+    "nodejs-aes256": "^1.0.1",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^3.8.0"
   },

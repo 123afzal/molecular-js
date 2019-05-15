@@ -3,11 +3,17 @@
 const { ServiceBroker } = require('moleculer');
 const config = require('../config');
 const logger = require('../lib/logger')(__filename);
+const NatsTransporter = require("moleculer").Transporters.NATS;
+const aes256 = require('nodejs-aes256');
+
+
+let option = config.get('nats');
+option.pass = aes256.decrypt(config.get('api.key'), option.pass);
 
 const broker = new ServiceBroker({
   namespace: 'demo-micro-service',
   nodeID: 'server',
-  transporter: config.get('nats'),
+  transporter: new NatsTransporter(option),
   logger: logger,
   cacher: config.get('cacher'),
   validation: true,

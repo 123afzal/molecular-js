@@ -11,9 +11,40 @@ const config = convict({
     default: 'develop',
     env: 'NODE_ENV'
   },
+
+  api: {
+    showExceptionToClient: {
+      format: Boolean,
+      default: false
+    },
+    port: {
+      format: 'port',
+      default: 3004
+    },
+    key: {
+      format: String,
+      default: 'consumer api key'
+    },
+    limit: {
+      format: String,
+      default: '50MB'
+    },
+    windowMs: {
+      format: Number,
+      default: 15 * 60 * 1000 // 15 minutes //todo in convict
+    },
+    max: {
+      format: Number,
+      default: 1000 // limit each IP to 1000 requests per windowMs
+    }
+  },
   nats: {
-    format: String,
-    default: 'nats://localhost:4222'
+    url: "nats://127.0.0.1:4222",
+    user: "open-api",
+    pass: "SHgj7NCpp1DWaUkZQrJwBunl0jylfWQRYA==",
+    tls:{
+      rejectUnauthorized: false
+    }
   },
   cacher: {
     type: {
@@ -48,7 +79,7 @@ const config = convict({
         },
         password: {
           format: String,
-          default: ''
+          default: 'abcd@1234'
         },
         db: {
           format: Number,
